@@ -8,38 +8,38 @@ datasource db {
 }
 
 model Usuario {
-  matricula  String   @id @default(uuid())
-  nome       String
-  email      String   @unique
-  senha      String
-  tipo       Role     
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  matricula String   @id
+  nome      String
+  email     String   @unique
+  senha     String
+  tipo      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relações
   disciplinasProfessor Disciplina[] @relation("DisciplinaProfessor")
-  historico Historico[]
+  historico            Historico[]
 
   @@map("usuarios")
 }
 
 model Disciplina {
-  codigo     String   @id
-  descricao  String
-  creditos   Int
-  turmaId    Int
-  horarioId  Int
-  professor  String
-  periodo    Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  codigo    String   @id
+  descricao String
+  creditos  Int
+  turmaId   Int
+  horarioId Int
+  professor String
+  periodo   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relações
-  turma      Turma    @relation(fields: [turmaId], references: [id])
-  horario    Horario  @relation(fields: [horarioId], references: [id])
+  turma            Turma   @relation(fields: [turmaId], references: [id])
+  horario          Horario @relation(fields: [horarioId], references: [id])
   professorRelacao Usuario @relation("DisciplinaProfessor", fields: [professor], references: [matricula])
 
-  historico Historico[] 
+  historico Historico[]
 
   @@map("disciplinas")
 }
@@ -64,24 +64,25 @@ enum Role {
 }
 
 model Turma {
-  id         Int      @id @default(autoincrement())
-  descricao  String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  descricao String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relação
-  disciplinas Disciplina[] 
+  disciplinas Disciplina[]
 
   @@map("turmas")
 }
 
 model Horario {
-  id         Int      @id @default(autoincrement())
-  descricao  String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  descricao String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relação
-  disciplinas Disciplina[]  
+  disciplinas Disciplina[]
+
   @@map("horarios")
 }

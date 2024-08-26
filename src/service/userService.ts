@@ -52,7 +52,7 @@ export const updateUsers = async (usuario:Usuario, matricula:string): Promise<Us
 		    matricula: matricula,
 		  },
 		});
-		if (result != null){
+		if (result === null){
 			return null;
 		}
 		

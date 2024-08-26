@@ -2,69 +2,69 @@ import { Disciplina, PrismaClient, Role } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const createUser = async (disciplina:Disciplina): Promise<Disciplina> => {
+export const createUser = async (disciplina: Disciplina): Promise<Disciplina> => {
 	const turma = await prisma.turma.findFirst({
-		where:{
+		where: {
 			id: disciplina.turmaId
 		}
 	})
-	if (turma == null){
+	if (turma == null) {
 		console.error('Turma invalida');
 	}
 
 	const horario = await prisma.horario.findFirst({
-		where:{
+		where: {
 			id: disciplina.turmaId
 		}
 	})
-	if (turma == null){
+	if (turma == null) {
 		console.error('Horário invalido');
 	}
 	const professor = await prisma.usuario.findFirst({
-		where:{
-			matricula:disciplina.professor,
+		where: {
+			matricula: disciplina.professor,
 			tipo: Role.PROFESSOR
 		}
 	})
-	if (professor == null){
+	if (professor == null) {
 		console.error('Professor não cadastrado');
 	}
-  return prisma.disciplina.create({
-	data: {
-		codigo: disciplina.codigo,
-		descricao: disciplina.descricao,
-		creditos: disciplina.creditos,
-		turmaId: disciplina.turmaId,
-		horarioId: disciplina.horarioId,
-		professor: disciplina.professor,
-		periodo: disciplina.periodo,
-		createdAt : new Date(),
-	      },
-  });
+	return prisma.disciplina.create({
+		data: {
+			codigo: disciplina.codigo,
+			descricao: disciplina.descricao,
+			creditos: disciplina.creditos,
+			turmaId: disciplina.turmaId,
+			horarioId: disciplina.horarioId,
+			professor: disciplina.professor,
+			periodo: disciplina.periodo,
+			createdAt: new Date(),
+		},
+	});
 };
 
-export const deleteDisciplina = async (codigo:string): Promise<boolean> => {
+export const deleteDisciplina = async (codigo: string): Promise<boolean> => {
 	try {
 		const result = await prisma.disciplina.deleteMany({
-		  where: {
-		    codigo: codigo,
-		  },
+			where: {
+				codigo: codigo,
+			},
 		});
 		return result.count > 0;
 	} catch (error) {
-	console.error('Error ', error);
-	return false;
+		console.error('Error ', error);
+		return false;
 	}
 };
 
-export const getDisciplina = async (codigo:string): Promise<Disciplina | null>=> {
+export const getDisciplina = async (codigo: string): Promise<Disciplina | null> => {
 	try {
 		const result = await prisma.disciplina.findFirst({
-		  where: {
-		    codigo: codigo,
-		  },
+			where: {
+				codigo: codigo,
+			},
 		});
-		
+
 		return result;
 	} catch (error) {
 		console.error('Error ', error);
@@ -72,20 +72,20 @@ export const getDisciplina = async (codigo:string): Promise<Disciplina | null>=>
 	}
 };
 
-export const updateDisciplina= async (disciplina:Disciplina, codigo:string): Promise<Disciplina | null>=> {
+export const updateDisciplina = async (disciplina: Disciplina, codigo: string): Promise<Disciplina | null> => {
 	try {
 		const result = await prisma.disciplina.findFirst({
-		  where: {
-		    codigo: codigo,
-		  },
+			where: {
+				codigo: codigo,
+			},
 		});
-		if (result != null){
+		if (result != null) {
 			return null;
 		}
-		
+
 		const update = await prisma.disciplina.update({
-			where:{
-				codigo:codigo,
+			where: {
+				codigo: codigo,
 			},
 			data: {
 				codigo: disciplina.codigo,
@@ -95,8 +95,8 @@ export const updateDisciplina= async (disciplina:Disciplina, codigo:string): Pro
 				horarioId: disciplina.horarioId,
 				professor: disciplina.professor,
 				periodo: disciplina.periodo,
-				updatedAt : new Date(),
-			      },
+				updatedAt: new Date(),
+			},
 		})
 		return update;
 

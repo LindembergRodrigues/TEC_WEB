@@ -37,7 +37,7 @@ export const createHistorico = async (historicoReq:Historico): Promise<Historico
   }
 };
 
-export const getHistoricoByMatriculaAndCodigo = async (matriculaUsuario: string): Promise<Historico | null> => {
+export const getHistorico = async (matriculaUsuario: string): Promise<Historico | null> => {
   try {
 	const usuario = await prisma.usuario.findFirst({
 		where:{
@@ -60,12 +60,12 @@ export const getHistoricoByMatriculaAndCodigo = async (matriculaUsuario: string)
   }
 };
 
-export const updateHistorico = async (historicoReq:Historico): Promise<Historico | null> => {
+export const updateHistorico = async (historicoReq:Historico, matricula:string, codigo:string): Promise<Historico | null> => {
   try {
 	const historicoAux = await prisma.historico.findFirst({
 		where: {
-			matriculaUsuario: historicoReq.matriculaUsuario,
-			codigoDisciplina: historicoReq.codigoDisciplina,
+			matriculaUsuario: matricula,
+			codigoDisciplina: codigo,
 		}
 	      });
 		if(historicoAux == null){

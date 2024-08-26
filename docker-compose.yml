@@ -17,7 +17,7 @@ services:
   app:
     image: your-app-image
     environment:
-      DATABASE_URL: "postgresql://postgres:root@postgres:5432/ProjWEB?schema=public"
+      DATABASE_URL: "postgresql://postgres:root@postgres:5432/ProjetoWEB?schema=public"
     depends_on:
       - postgres
     networks:
