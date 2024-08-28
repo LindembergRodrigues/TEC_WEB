@@ -2,7 +2,7 @@ import { Disciplina, PrismaClient, Role } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const createUser = async (disciplina: Disciplina): Promise<Disciplina> => {
+export const createDisciplina = async (disciplina: Disciplina): Promise<Disciplina> => {
 	const turma = await prisma.turma.findFirst({
 		where: {
 			id: disciplina.turmaId

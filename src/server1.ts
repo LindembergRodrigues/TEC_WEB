@@ -81,3 +81,5 @@ app.delete('/ca/removeHorario/:id', (req: Request, res: Response) => {
   
   res.status(204).send();
 });
+
+//"ts-node src/server.ts"

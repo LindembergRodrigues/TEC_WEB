@@ -1,43 +1,43 @@
 import { Request, Response } from 'express';
-import { PrismaClient, Usuario } from '@prisma/client';
-import * as userService from '../service/userService';
+import { Disciplina, PrismaClient, Usuario } from '@prisma/client';
+import * as disciplinaService from '../service/disciplinaService'; 
 const prisma = new PrismaClient();
 
-export const createUser = async (req: Request, res: Response) => {
-  const usuario = req.body as Usuario;
+export const createDisciplina = async (req: Request, res: Response) => {
+  const disciplina = req.body as Disciplina;
   try {
-    userService.createUser(usuario);
-    res.status(201).json("user");
+    disciplinaService.createDisciplina(disciplina);
+    res.status(201).json("disciplina");
   } catch (error) {
     res.status(500).json({ error: 'User creation failed' });
   }
 };
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getDisciplina = async (req: Request, res: Response) => {
   try {
-    const matricula = req.params.matricula;
-    const users = await userService.getUsers(matricula);
-    res.status(200).json(users);
+    const codigo = req.params.codigo;
+    const disciplina = await disciplinaService.getDisciplina(codigo);
+    res.status(200).json(disciplina);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch users' });
   }
 };
 
-export const deleteUsers = async (req: Request, res: Response) => {
+export const deleteDisciplina= async (req: Request, res: Response) => {
   try {
-    const matricula = req.params.matricula;
-    const users = await userService.deleteUsers(matricula);
+    const codigo = req.params.codigo;
+    const disciplina = await disciplinaService.deleteDisciplina(codigo);
     res.status(201).json('Removido!');
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch users' });
   }
 };
 
-export const updateUsers = async (req: Request, res: Response) => {
+export const updateDisciplina= async (req: Request, res: Response) => {
   try {
-    const matricula = req.params.matricula;
-    const usuario = req.body as Usuario;
-    const users = await userService.deleteUsers(matricula);
+    const codigo = req.params.matricula;
+    const disciplina = req.body as Disciplina;
+    const disciplinas = await disciplinaService.updateDisciplina(disciplina,codigo);
     res.status(201).json('Removido!');
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch users' });
