@@ -2,42 +2,45 @@ import { PrismaClient, Usuario } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const createUser = async (usuario:Usuario): Promise<Usuario> => {
-  return prisma.usuario.create({
-	data: {
-		matricula: usuario.matricula,
-		nome: usuario.nome,
-		email: usuario.email,
-		senha: usuario.senha,
-		tipo: usuario.tipo,
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	      },
-  });
+export const createUser = async (usuario: Usuario): Promise<Usuario> => {
+	if (usuario == null) {
+		console.error("Vazio")
+	}
+	return prisma.usuario.create({
+		data: {
+			matricula: usuario.matricula,
+			nome: usuario.nome,
+			email: usuario.email,
+			senha: usuario.senha,
+			tipo: usuario.tipo,
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	});
 };
 
-export const deleteUsers = async (matricula:string): Promise<boolean> => {
+export const deleteUsers = async (matricula: string): Promise<boolean> => {
 	try {
 		const result = await prisma.usuario.deleteMany({
-		  where: {
-		    matricula: matricula,
-		  },
+			where: {
+				matricula: matricula,
+			},
 		});
 		return result.count > 0;
 	} catch (error) {
-	console.error('Error ', error);
-	return false;
+		console.error('Error ', error);
+		return false;
 	}
 };
 
-export const getUsers = async (matricula:string): Promise<Usuario | null>=> {
+export const getUsers = async (matricula: string): Promise<Usuario | null> => {
 	try {
 		const result = await prisma.usuario.findFirst({
-		  where: {
-		    matricula: matricula,
-		  },
+			where: {
+				matricula: matricula,
+			},
 		});
-		
+
 		return result;
 	} catch (error) {
 		console.error('Error ', error);
@@ -45,20 +48,20 @@ export const getUsers = async (matricula:string): Promise<Usuario | null>=> {
 	}
 };
 
-export const updateUsers = async (usuario:Usuario, matricula:string): Promise<Usuario | null>=> {
+export const updateUsers = async (usuario: Usuario, matricula: string): Promise<Usuario | null> => {
 	try {
 		const result = await prisma.usuario.findFirst({
-		  where: {
-		    matricula: matricula,
-		  },
+			where: {
+				matricula: matricula,
+			},
 		});
-		if (result === null){
+		if (result === null) {
 			return null;
 		}
-		
+
 		const update = await prisma.usuario.update({
-			where:{
-				matricula:matricula,
+			where: {
+				matricula: matricula,
 			},
 			data: {
 				matricula: usuario.matricula,
@@ -67,7 +70,7 @@ export const updateUsers = async (usuario:Usuario, matricula:string): Promise<Us
 				senha: usuario.senha,
 				tipo: usuario.tipo,
 				updatedAt: new Date(),
-			      }
+			}
 		})
 		return update;
 

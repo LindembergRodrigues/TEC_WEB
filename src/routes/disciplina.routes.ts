@@ -4,9 +4,9 @@ import { createDisciplina, deleteDisciplina, getDisciplina, updateDisciplina } f
 const router = Router();
 
 router.post('/criarDisciplina', createDisciplina);
-router.get('/capturarDisciplina', getDisciplina);
-router.delete('/capturarDisciplina', deleteDisciplina);''
-router.put('/atulizaDisciplina', updateDisciplina);
+router.get('/capturarDisciplina/:codigo', getDisciplina);
+router.delete('/capturarDisciplina:codigo', deleteDisciplina);''
+router.put('/atulizaDisciplina:codigo', updateDisciplina);
 
 
 export default router;

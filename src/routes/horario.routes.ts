@@ -4,9 +4,9 @@ import { createHorario, deleteHorarios, getHorarios, updateHorarios } from '../c
 const router = Router();
 
 router.post('/criarHorario', createHorario);
-router.get('/capturarHorario', getHorarios);
-router.delete('/capturarHorario', deleteHorarios);
-router.put('/atulizaHorario', updateHorarios);
+router.get('/capturarHorario/:id', getHorarios);
+router.delete('/capturarHorario/:id', deleteHorarios);
+router.put('/atulizaHorario/:id', updateHorarios);
 
 
 export default router;

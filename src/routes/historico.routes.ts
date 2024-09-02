@@ -4,9 +4,9 @@ import { createHistorico, deleteHistoricos, getHistoricos, updateHistoricos } fr
 const router = Router();
 
 router.post('/criarHistorico', createHistorico);
-router.get('/capturarHistorico', getHistoricos);
-router.delete('/capturarHistorico', deleteHistoricos);
-router.put('/atulizaHistorico', updateHistoricos);
+router.get('/capturarHistorico/:matriculaUsuario', getHistoricos);
+router.delete('/capturarHistorico/:matriculaUsuario', deleteHistoricos);
+router.put('/atulizaHistorico/:matriculaUsuario', updateHistoricos);
 
 
 export default router;

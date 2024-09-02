@@ -4,9 +4,9 @@ import { createTurma, deleteTurmas, getTurmas, updateTurmas } from '../controlle
 const router = Router();
 
 router.post('/criarTurma', createTurma);
-router.get('/capturarTurma', getTurmas);
-router.delete('/capturarTurma', deleteTurmas);
-router.put('/atulizaTurma', updateTurmas);
+router.get('/capturarTurma/:id', getTurmas);
+router.delete('/capturarTurma/:id', deleteTurmas);
+router.put('/atulizaTurma/:id', updateTurmas);
 
 
 export default router;
