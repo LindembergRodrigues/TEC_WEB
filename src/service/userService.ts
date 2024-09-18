@@ -29,6 +29,7 @@ export const deleteUsers = async (matricula: string): Promise<boolean> => {
 		});
 		return result.count > 0;
 	} catch (error) {
+		
 		console.error('Error ', error);
 		return false;
 	}
