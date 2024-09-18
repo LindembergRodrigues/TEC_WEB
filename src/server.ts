@@ -6,6 +6,7 @@ import turmaRoutes from './routes/turma.routes';
 import horarioRouter from './routes/horario.routes'
 import historicoRouter from './routes/historico.routes';
 import disciplinaRouter from './routes/disciplina.routes';
+import {error} from './Error/getError';
 
 const app = express();
 const prisma = new PrismaClient();
@@ -22,6 +23,8 @@ app.use('/disciplina',disciplinaRouter);
 app.use('/disciplina',historicoRouter);
 app.use('/disciplina',horarioRouter);
 app.use('/disciplina',turmaRoutes);
+app.use('/login',loginRouter);
+app.use(error);
 
 // app.use('/', (req, res) => {
 //   res.redirect('/api-docs');

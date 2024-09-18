@@ -1,17 +1,19 @@
 import { PrismaClient, Usuario } from '@prisma/client';
+const bcrypt = require('bcrypt'); 
 
 const prisma = new PrismaClient();
 
 export const createUser = async (usuario: Usuario): Promise<Usuario> => {
-	if (usuario == null) {
+	if (Object.keys(usuario).length === 0) {
 		console.error("Vazio")
 	}
+	usuario.senha = 
 	return prisma.usuario.create({
 		data: {
 			matricula: usuario.matricula,
 			nome: usuario.nome,
 			email: usuario.email,
-			senha: usuario.senha,
+			senha: await bcrypt.hash(usuario.senha,10),
 			tipo: usuario.tipo,
 			createdAt: new Date(),
 			updatedAt: new Date(),
