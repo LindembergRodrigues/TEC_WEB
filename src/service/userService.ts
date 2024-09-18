@@ -7,7 +7,6 @@ export const createUser = async (usuario: Usuario): Promise<Usuario> => {
 	if (Object.keys(usuario).length === 0) {
 		console.error("Vazio")
 	}
-	usuario.senha = 
 	return prisma.usuario.create({
 		data: {
 			matricula: usuario.matricula,

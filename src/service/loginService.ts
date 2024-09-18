@@ -1,5 +1,6 @@
 import { PrismaClient, Usuario } from '@prisma/client';
 import { UsuarioDTO } from '../DTO/usuario.dto';
+import { ResetSenha } from '../DTO/resetSenha.dto'
 const bcrypt = require('bcrypt'); 
 
 const prisma = new PrismaClient();
@@ -22,23 +23,23 @@ export const loginUser = async (usuario: UsuarioDTO): Promise<Usuario | null> =>
 };
 
 
-export const resetarSenha = async (matriculaUsuario:string, senhaAtual:string, novaSenha:string): Promise<boolean | null> => {
+export const resetarSenha = async (resetSenha:ResetSenha): Promise<boolean | null> => {
 	try {
 		const result = await prisma.usuario.findFirst({
 			where: {
-				matricula: matriculaUsuario,
-				senha: await bcrypt.hash(senhaAtual,10),
+				matricula: resetSenha.matricula,
+				senha: await bcrypt.hash(resetSenha.senha,10),
 			},
 		});
 		if (result == null) { return false}
 
 		await prisma.usuario.update({
 			where: {
-				matricula: matriculaUsuario,
-				senha: await bcrypt.hash(senhaAtual,10),
+				matricula: resetSenha.matricula,
+				senha: await bcrypt.hash(resetSenha.senha,10),
 			},
 			data: {
-			  senha: await bcrypt.hash(novaSenha,10),
+			  senha: await bcrypt.hash(resetSenha.novaSenha,10),
 			},
 		      });
 

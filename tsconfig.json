@@ -6,7 +6,10 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
-      "outDir": "./dist"
+      "typeRoots": ["./node_modules/@types", "./@types"],
+      "outDir": "./dist",
+      "experimentalDecorators": true,       
+    "emitDecoratorMetadata": true 
     },
     "include": [
       "./**/*.ts","src"
