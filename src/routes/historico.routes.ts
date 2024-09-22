@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/criarHistorico', createHistorico);
 router.get('/capturarHistorico/:matriculaUsuario', getHistoricos);
-router.delete('/capturarHistorico/:matriculaUsuario', deleteHistoricos);
+router.delete('/deletarHistorico/:matriculaUsuario', deleteHistoricos);
 router.put('/atulizaHistorico/:matriculaUsuario', updateHistoricos);
 
 
