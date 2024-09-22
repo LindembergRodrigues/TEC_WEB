@@ -1,36 +1,31 @@
-const swaggerJSDoc = require('swagger-jsdoc')
+import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { Express } from 'express';
 
-// Defina as opções do Swagger
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API de Usuários',
-      version: '1.0.0',
-      description: 'Documentação da API de Usuários utilizando Prisma e Express',
-    },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-      },
-    ],
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'API Documentation',
+    version: '1.0.0',
+    description: 'Documentação da API do sistema',
+    contact: {
+      name: 'Equipe de Desenvolvimento',
+      email: 'dev@example.com'
+    }
   },
-  apis: ['./src/controllers/*.ts'], // Caminho dos arquivos que contêm os endpoints
+  servers: [
+    {
+      url: 'http://localhost:3000',
+      description: 'Servidor de desenvolvimento'
+    }
+  ]
 };
 
-// Gerar a especificação do Swagger
-const swaggerSpec = swaggerJSDoc(options);
-
-// Configuração para exibir a documentação Swagger
-export const swaggerDocs = (app: Express, port: number) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-  // Redirecionar a raiz para o Swagger UI
-  app.get('/', (req, res) => {
-    res.redirect('/api-docs');
-  });
-
-  console.log(`Swagger docs available at http://localhost:${port}/api-docs`);
+const options = {
+  swaggerDefinition,
+  // Caminho para os arquivos de definição de rota
+  apis: ['./routes/*.js'],  // Ajuste o caminho de acordo com o seu projeto
 };
+
+const swaggerDocs = swaggerJsdoc(options);
+
+export { swaggerDocs, swaggerUi };

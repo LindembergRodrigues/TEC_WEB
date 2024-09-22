@@ -2,35 +2,7 @@ import { Request, Response } from 'express';
 import { Disciplina } from '@prisma/client';
 import * as disciplinaService from '../service/disciplinaService';
 
-/**
- * @swagger
- * tags:
- *   name: Disciplina
- *   description: Operações relacionadas a disciplinas.
- */
 
-/**
- * @swagger
- * /disciplina:
- *   post:
- *     summary: Cria uma nova disciplina
- *     tags: [Disciplina]
- *     requestBody:
- *       description: Dados da disciplina a ser criada
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Disciplina'
- *     responses:
- *       201:
- *         description: Disciplina criada com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Disciplina'
- *       500:
- *         description: Erro ao criar disciplina
- */
 export const createDisciplina = async (req: Request, res: Response) => {
   const disciplina = req.body as Disciplina;
   try {
@@ -41,28 +13,7 @@ export const createDisciplina = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /disciplina/{codigo}:
- *   get:
- *     summary: Obtém uma disciplina pelo código
- *     tags: [Disciplina]
- *     parameters:
- *       - in: path
- *         name: codigo
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Disciplina encontrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Disciplina'
- *       500:
- *         description: Erro ao buscar disciplina
- */
+
 export const getDisciplina = async (req: Request, res: Response) => {
   try {
     const codigo = req.params.codigo;
@@ -73,24 +24,6 @@ export const getDisciplina = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /disciplina/{codigo}:
- *   delete:
- *     summary: Remove uma disciplina pelo código
- *     tags: [Disciplina]
- *     parameters:
- *       - in: path
- *         name: codigo
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Disciplina removida com sucesso
- *       500:
- *         description: Erro ao remover disciplina
- */
 export const deleteDisciplina = async (req: Request, res: Response) => {
   try {
     const codigo = req.params.codigo;
@@ -101,34 +34,6 @@ export const deleteDisciplina = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /disciplina/{codigo}:
- *   put:
- *     summary: Atualiza uma disciplina pelo código
- *     tags: [Disciplina]
- *     parameters:
- *       - in: path
- *         name: codigo
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       description: Dados da disciplina a ser atualizada
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Disciplina'
- *     responses:
- *       200:
- *         description: Disciplina atualizada com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Disciplina'
- *       500:
- *         description: Erro ao atualizar disciplina
- */
 export const updateDisciplina = async (req: Request, res: Response) => {
   try {
     const codigo = req.params.codigo;
@@ -139,18 +44,3 @@ export const updateDisciplina = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to update disciplina' });
   }
 };
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     Disciplina:
- *       type: object
- *       properties:
- *         nome:
- *           type: string
- *           example: Matemática
- *         codigo:
- *           type: string
- *           example: MAT101
- */

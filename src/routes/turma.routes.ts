@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/criarTurma', createTurma);
 router.get('/capturarTurma/:id', getTurmas);
-router.delete('/capturarTurma/:id', deleteTurmas);
+router.delete('/deletarTurma/:id', deleteTurmas);
 router.put('/atulizaTurma/:id', updateTurmas);
 
 

@@ -4,35 +4,6 @@ import * as userService from '../service/userService';
 
 const prisma = new PrismaClient();
 
-/**
- * @swagger
- * tags:
- *   name: Usuario
- *   description: Operações relacionadas aos usuários.
- */
-
-/**
- * @swagger
- * /usuario:
- *   post:
- *     summary: Cria um novo usuário
- *     tags: [Usuario]
- *     requestBody:
- *       description: Dados do usuário a ser criado
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Usuario'
- *     responses:
- *       201:
- *         description: Usuário criado com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       500:
- *         description: Erro ao criar usuário
- */
 export const createUser = async (req: Request, res: Response) => {
   const usuario = req.body as Usuario;
   try {
@@ -43,32 +14,6 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /usuario/{matricula}:
- *   get:
- *     summary: Obtém um usuário pelo ID de matrícula
- *     tags: [Usuario]
- *     parameters:
- *       - name: matricula
- *         in: path
- *         required: true
- *         description: Matrícula do usuário
- *         schema:
- *           type: string
- *           example: "123456"
- *     responses:
- *       200:
- *         description: Usuário encontrado com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Usuário não encontrado
- *       500:
- *         description: Erro ao buscar usuário
- */
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const matricula = req.params.matricula;
@@ -84,28 +29,6 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /usuario/{matricula}:
- *   delete:
- *     summary: Deleta um usuário pelo ID de matrícula
- *     tags: [Usuario]
- *     parameters:
- *       - name: matricula
- *         in: path
- *         required: true
- *         description: Matrícula do usuário a ser removido
- *         schema:
- *           type: string
- *           example: "123456"
- *     responses:
- *       200:
- *         description: Usuário removido com sucesso
- *       404:
- *         description: Usuário não encontrado
- *       500:
- *         description: Erro ao remover usuário
- */
 export const deleteUsers = async (req: Request, res: Response) => {
   try {
     const matricula = req.params.matricula;
@@ -121,38 +44,6 @@ export const deleteUsers = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * /usuario/{matricula}:
- *   put:
- *     summary: Atualiza um usuário pelo ID de matrícula
- *     tags: [Usuario]
- *     parameters:
- *       - name: matricula
- *         in: path
- *         required: true
- *         description: Matrícula do usuário a ser atualizado
- *         schema:
- *           type: string
- *           example: "123456"
- *     requestBody:
- *       description: Dados do usuário para atualização
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Usuario'
- *     responses:
- *       200:
- *         description: Usuário atualizado com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Usuário não encontrado ou atualização falhou
- *       500:
- *         description: Erro ao atualizar usuário
- */
 export const updateUsers = async (req: Request, res: Response) => {
   try {
     const matricula = req.params.matricula;
@@ -169,26 +60,4 @@ export const updateUsers = async (req: Request, res: Response) => {
   }
 };
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Usuario:
- *       type: object
- *       properties:
- *         matricula:
- *           type: string
- *           example: "123456"
- *         nome:
- *           type: string
- *           example: "João Silva"
- *         email:
- *           type: string
- *           example: "joao.silva@example.com"
- *         senha:
- *           type: string
- *           example: "senha123"
- *         tipo:
- *           type: string
- *           example: "estudante"
- */
+

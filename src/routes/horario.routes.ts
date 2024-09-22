@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/criarHorario', createHorario);
 router.get('/capturarHorario/:id', getHorarios);
-router.delete('/capturarHorario/:id', deleteHorarios);
+router.delete('/deletarHorario/:id', deleteHorarios);
 router.put('/atulizaHorario/:id', updateHorarios);
 
 
