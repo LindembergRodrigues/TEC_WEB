@@ -1,3 +1,4 @@
+// swagger.js
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
@@ -6,26 +7,20 @@ const swaggerDefinition = {
   info: {
     title: 'API Documentation',
     version: '1.0.0',
-    description: 'Documentação da API do sistema',
-    contact: {
-      name: 'Equipe de Desenvolvimento',
-      email: 'dev@example.com'
-    }
+    description: 'Documentação da API',
   },
   servers: [
     {
       url: 'http://localhost:3000',
-      description: 'Servidor de desenvolvimento'
-    }
-  ]
+    },
+  ],
 };
 
 const options = {
   swaggerDefinition,
-  // Caminho para os arquivos de definição de rota
-  apis: ['./routes/*.js'],  // Ajuste o caminho de acordo com o seu projeto
+  apis: ['./src/controllers/*.ts'], // Ajuste o caminho para os arquivos das rotas
 };
 
-const swaggerDocs = swaggerJsdoc(options);
+const swaggerSpec = swaggerJsdoc(options);
 
-export { swaggerDocs, swaggerUi };
+export { swaggerSpec, swaggerUi };

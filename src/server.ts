@@ -1,3 +1,5 @@
+
+import { swaggerSpec } from '../swagger';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { PrismaClient } from '@prisma/client';
@@ -7,7 +9,6 @@ import horarioRouter from './routes/horario.routes';
 import historicoRouter from './routes/historico.routes';
 import disciplinaRouter from './routes/disciplina.routes';
 import loginRouter from './routes/login.routes';
-import { swaggerDocs } from '../swagger';
 
 const app = express();
 const prisma = new PrismaClient();
@@ -19,7 +20,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+//app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use('/usuario', userRouter);

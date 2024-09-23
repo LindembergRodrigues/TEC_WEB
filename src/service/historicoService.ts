@@ -1,4 +1,5 @@
-import { Historico, PrismaClient, Role } from '@prisma/client';
+import {Disciplina, Historico, PrismaClient, Role} from '@prisma/client';
+import internal from "stream";
 
 const prisma = new PrismaClient();
 
@@ -104,5 +105,42 @@ export const deleteHistorico = async (matriculaUsuario: string, codigoDisciplina
     console.error('Error deleting historico:', error);
     throw new Error('Failed to delete historico');
   }
+};
+
+export const sugerirMatricula = async (matriculaUsuario: string, qtdCredito: number): Promise<Disciplina[] | null | string> => {
+    const historico = await prisma.historico.findMany({
+        where: {
+            matriculaUsuario: matriculaUsuario,
+            situacao:"APR"
+        }
+    });
+    if (historico.length === 0) {
+        return prisma.disciplina.findMany({
+            where: {
+                periodo:1
+            }
+        })
+    }else{
+        const disciplinasCursadas = historico.map((item) => item.matriculaUsuario );
+
+        let qtdCadeiras = 0
+        if(qtdCredito === 0 ){
+            qtdCadeiras = 24/4;
+        }else if (qtdCredito >= 16 && qtdCredito <= 24 && qtdCredito %4 ===0 ){
+            qtdCadeiras = qtdCadeiras /4;
+        }else{
+            return  "Quantidade de creditos invalida!";
+        }
+
+        const sugestao = prisma.disciplina.findMany({
+            where: {
+                codigo: {
+                    notIn:disciplinasCursadas
+                }
+            },take:qtdCadeiras
+        })
+        return sugestao;
+    }
+    return null;
 };
 

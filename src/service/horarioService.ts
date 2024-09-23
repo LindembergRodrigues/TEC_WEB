@@ -15,7 +15,7 @@ export const createHorario = async (horario: Horario): Promise<Horario> => {
 
 export const deleteHorario = async (id: number): Promise<boolean> => {
 	try {
-		const result = await prisma.turma.deleteMany({
+		const result = await prisma.horario.deleteMany({
 			where: {
 				id: id,
 			},
@@ -49,7 +49,7 @@ export const updateHorario= async (horario: Horario, id: number): Promise<Horari
 				id: id,
 			},
 		});
-		if (result != null) {
+		if (result == null) {
 			return null;
 		}
 
@@ -62,6 +62,11 @@ export const updateHorario= async (horario: Horario, id: number): Promise<Horari
 				updatedAt: new Date()
 			},
 		})
+		const result2 = await prisma.horario.findFirst({
+			where: {
+				id: id,
+			},
+		});
 		return update;
 
 	} catch (error) {

@@ -27,17 +27,17 @@ model Disciplina {
   codigo    String   @id
   descricao String
   creditos  Int
-  turmaId   Int
-  horarioId Int
-  professor String
+  turmaId   Int?
+  horarioId Int?
+  professor String?
   periodo   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relações
-  turma            Turma   @relation(fields: [turmaId], references: [id])
-  horario          Horario @relation(fields: [horarioId], references: [id])
-  professorRelacao Usuario @relation("DisciplinaProfessor", fields: [professor], references: [matricula])
+  turma            Turma?   @relation(fields: [turmaId], references: [id])
+  horario          Horario? @relation(fields: [horarioId], references: [id])
+  professorRelacao Usuario? @relation("DisciplinaProfessor", fields: [professor], references: [matricula])
 
   historico Historico[]
 

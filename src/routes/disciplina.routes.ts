@@ -5,8 +5,8 @@ const router = Router();
 
 router.post('/criarDisciplina', createDisciplina);
 router.get('/capturarDisciplina/:codigo', getDisciplina);
-router.delete('/deletarDisciplina:codigo', deleteDisciplina);''
-router.put('/atulizarDisciplina:codigo', updateDisciplina);
+router.delete('/deletarDisciplina/:codigo', deleteDisciplina);
+router.put('/atulizarDisciplina/:codigo', updateDisciplina);
 
 
 export default router;

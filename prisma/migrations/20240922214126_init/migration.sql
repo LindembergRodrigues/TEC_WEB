@@ -24,6 +24,7 @@ CREATE TABLE "disciplinas" (
     "professor" TEXT NOT NULL,
     "periodo" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "disciplinas_pkey" PRIMARY KEY ("codigo")
 );
@@ -32,7 +33,7 @@ CREATE TABLE "disciplinas" (
 CREATE TABLE "historico" (
     "matriculaUsuario" TEXT NOT NULL,
     "codigoDisciplina" TEXT NOT NULL,
-    "situacao" TEXT NOT NULL,
+    "situacao" TEXT,
 
     CONSTRAINT "historico_pkey" PRIMARY KEY ("matriculaUsuario","codigoDisciplina")
 );

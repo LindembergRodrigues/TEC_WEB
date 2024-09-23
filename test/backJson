@@ -1,0 +1,72 @@
+[
+  {
+    "matricula": "20230001",
+    "nome": "Ana Pereira",
+    "email": "ana.pereira@example.com",
+    "senha": "senhaSegura1",
+    "tipo": "ALUNO"
+  },
+  {
+    "matricula": "20230002",
+    "nome": "Carlos Santos",
+    "email": "carlos.santos@example.com",
+    "senha": "senhaSegura2",
+    "tipo": "ALUNO"
+  },
+  {
+    "matricula": "20230003",
+    "nome": "Maria Oliveira",
+    "email": "maria.oliveira@example.com",
+    "senha": "senhaSegura3",
+    "tipo": "PROFESSOR"
+  },
+  {
+    "matricula": "20230004",
+    "nome": "João Silva",
+    "email": "joao.silva@example.com",
+    "senha": "senhaSegura4",
+    "tipo": "PROFESSOR"
+  },
+  {
+    "matricula": "20230005",
+    "nome": "Fernanda Lima",
+    "email": "fernanda.lima@example.com",
+    "senha": "senhaSegura5",
+    "tipo": "COORDENADOR"
+  },
+  {
+    "matricula": "20230006",
+    "nome": "Lucas Almeida",
+    "email": "lucas.almeida@example.com",
+    "senha": "senhaSegura6",
+    "tipo": "ALUNO"
+  },
+  {
+    "matricula": "20230007",
+    "nome": "Paula Costa",
+    "email": "paula.costa@example.com",
+    "senha": "senhaSegura7",
+    "tipo": "COORDENADOR"
+  },
+  {
+    "matricula": "20230008",
+    "nome": "Ricardo Gomes",
+    "email": "ricardo.gomes@example.com",
+    "senha": "senhaSegura8",
+    "tipo": "PROFESSOR"
+  },
+  {
+    "matricula": "20230009",
+    "nome": "Juliana Rocha",
+    "email": "juliana.rocha@example.com",
+    "senha": "senhaSegura9",
+    "tipo": "ALUNO"
+  },
+  {
+    "matricula": "20230010",
+    "nome": "Roberto Ferreira",
+    "email": "roberto.ferreira@example.com",
+    "senha": "senhaSegura10",
+    "tipo": "PROFESSOR"
+  }
+]

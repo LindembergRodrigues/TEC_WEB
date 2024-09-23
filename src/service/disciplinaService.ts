@@ -3,40 +3,12 @@ import { Disciplina, PrismaClient, Role } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const createDisciplina = async (disciplina: Disciplina): Promise<Disciplina> => {
-	const turma = await prisma.turma.findFirst({
-		where: {
-			id: disciplina.turmaId
-		}
-	})
-	if (turma == null) {
-		console.error('Turma invalida');
-	}
 
-	const horario = await prisma.horario.findFirst({
-		where: {
-			id: disciplina.turmaId
-		}
-	})
-	if (turma == null) {
-		console.error('Horário invalido');
-	}
-	const professor = await prisma.usuario.findFirst({
-		where: {
-			matricula: disciplina.professor,
-			tipo: Role.PROFESSOR
-		}
-	})
-	if (professor == null) {
-		console.error('Professor não cadastrado');
-	}
 	return prisma.disciplina.create({
 		data: {
 			codigo: disciplina.codigo,
 			descricao: disciplina.descricao,
 			creditos: disciplina.creditos,
-			turmaId: disciplina.turmaId,
-			horarioId: disciplina.horarioId,
-			professor: disciplina.professor,
 			periodo: disciplina.periodo,
 			createdAt: new Date(),
 		},
@@ -79,7 +51,7 @@ export const updateDisciplina = async (disciplina: Disciplina, codigo: string): 
 				codigo: codigo,
 			},
 		});
-		if (result != null) {
+		if (result == null) {
 			return null;
 		}
 
