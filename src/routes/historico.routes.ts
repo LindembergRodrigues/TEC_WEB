@@ -14,6 +14,6 @@ router.post('/criarHistorico', createHistorico);
 router.get('/capturarHistorico/:matriculaUsuario', getHistoricos);
 router.delete('/deletarHistorico/:matriculaUsuario', deleteHistoricos);
 router.put('/atulizaHistorico/:matriculaUsuario', updateHistoricos);
-router.get('/sugerirDisciplina/:matricula/:creditos', sugerirMatricula);
+router.get('/sugerirDisciplina/:matricula/:qtdCreditos', sugerirMatricula);
 
 export default router;
