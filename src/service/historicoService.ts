@@ -108,12 +108,23 @@ export const deleteHistorico = async (matriculaUsuario: string, codigoDisciplina
 };
 
 export const sugerirMatricula = async (matriculaUsuario: string, qtdCredito: number): Promise<Disciplina[] | null | string> => {
+    const aluno = await  prisma.usuario.findMany({
+        where: {
+            matricula: matriculaUsuario,
+            tipo: Role.ALUNO,
+        }
+        })
+    if(aluno.length === 0){
+        return "Aluno não cadastrado!";
+    }
+
     const historico = await prisma.historico.findMany({
         where: {
             matriculaUsuario: matriculaUsuario,
             situacao:"APR"
         }
     });
+
     if (historico.length === 0) {
         return prisma.disciplina.findMany({
             where: {

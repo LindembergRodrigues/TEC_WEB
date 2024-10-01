@@ -1,22 +1,21 @@
 {
-    "compilerOptions": {
-      "target": "ES6", // ou "ES2015"
-      "module": "commonjs",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "typeRoots": ["./node_modules/@types", "./@types"],
-      "outDir": "./dist",
-      "experimentalDecorators": true,       
-    "emitDecoratorMetadata": true 
-    },
-    "include": [
-      "./**/*.ts","src"
-    ],
-    "exclude": [
-      "dist",
-      "node_modules",
-      "**/*.spec.ts"
-    ]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }

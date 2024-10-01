@@ -1,7 +1,7 @@
 import { PrismaClient, Usuario } from '@prisma/client';
 import { UsuarioDTO } from '../DTO/usuario.dto';
 import { ResetSenha } from '../DTO/resetSenha.dto'
-const bcrypt = require('bcrypt'); 
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 

@@ -29,14 +29,16 @@ export const deleteDisciplina = async (codigo: string): Promise<boolean> => {
 	}
 };
 
-export const getDisciplina = async (codigo: string): Promise<Disciplina | null> => {
+export const getDisciplina = async (codigo: string): Promise<Disciplina | null | string> => {
 	try {
 		const result = await prisma.disciplina.findFirst({
 			where: {
 				codigo: codigo,
 			},
 		});
-
+		if(result === null){
+			return "Disciplina não cadastrada!";
+		}
 		return result;
 	} catch (error) {
 		console.error('Error ', error);
@@ -44,7 +46,7 @@ export const getDisciplina = async (codigo: string): Promise<Disciplina | null> 
 	}
 };
 
-export const updateDisciplina = async (disciplina: Disciplina, codigo: string): Promise<Disciplina | null> => {
+export const updateDisciplina = async (disciplina: Disciplina, codigo: string): Promise<Disciplina | null | string> => {
 	try {
 		const result = await prisma.disciplina.findFirst({
 			where: {
@@ -52,7 +54,7 @@ export const updateDisciplina = async (disciplina: Disciplina, codigo: string): 
 			},
 		});
 		if (result == null) {
-			return null;
+			return "Disciplina não cadastrada!";
 		}
 
 		const update = await prisma.disciplina.update({

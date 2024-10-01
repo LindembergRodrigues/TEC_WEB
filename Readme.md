@@ -1,16 +1,16 @@
-#### Cronograma
+* para executar o sistema chamamos o npm install para installar as dependências, caso seja a primeira execução,
 
-pm install @prisma/client
+## Passos para iniciar o banco de dados
 
-pm install prisma --save-dev
+1. Criar/baixar a imagem Docker do Postgres:  
+   `docker pull postgres`
+2. Persistir os dados  
+   `docker volume create pgdata`
+3. Criar base de dados  
+    `docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=root -v pgdata:/var/lib/postgresql/data postgres`
 
-npx prisma migrate dev --name nome
+4. Criar as tabelas via migration  
+   `npx prisma migrate dev`
 
-npm add swagger-ui-express
 
-**Rode seu projeto local, utilize: npm run dev
-
-Pra compilar e rodar o servidor utilize: npm run build && npm start**
-=====================================================================
-
-Documentação https://1drv.ms/w/s!AvWgc9ukNb6zha0_gkIzHeDpz8sGTA?e=XlKAd4
+### ` Rode seu projeto local, utilize: npm run dev`

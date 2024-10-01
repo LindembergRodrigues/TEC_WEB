@@ -34,7 +34,7 @@ export const getHorario = async (id: number): Promise<Horario | null> => {
 				id: id,
 			},
 		});
-
+		if (result.l)
 		return result;
 	} catch (error) {
 		console.error('Error ', error);
