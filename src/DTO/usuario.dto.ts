@@ -1,6 +1,6 @@
 import { Role } from '../Enum/role.enum'
 export interface UsuarioDTO {
-	email: string;
+	matricula: string;
 	senha: string;
 	tipo: Role;
 }

@@ -27,14 +27,16 @@ export const deleteHorario = async (id: number): Promise<boolean> => {
 	}
 };
 
-export const getHorario = async (id: number): Promise<Horario | null> => {
+export const getHorario = async (id: number): Promise<Horario | null | string> => {
 	try {
 		const result = await prisma.horario.findFirst({
 			where: {
 				id: id,
 			},
 		});
-		if (result.l)
+		if (result == null) {
+			return "Horário não identificado!";
+		}
 		return result;
 	} catch (error) {
 		console.error('Error ', error);

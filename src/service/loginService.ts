@@ -5,38 +5,37 @@ import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-export const loginUser = async (usuario: UsuarioDTO): Promise<Usuario | null> => {
+export const loginUser = async (usuario: UsuarioDTO): Promise<Usuario | null > => {
 	if (Object.keys(usuario).length === 0) {
 		console.error("Dados invalidados")
 	}
 	const usuarioLogin = await prisma.usuario.findFirst({
 		where: {
-			email: usuario.email,
-			senha: await bcrypt.hash(usuario.senha,10),
+			matricula: usuario.matricula
 		},
 	});
 	
-	if(Object.keys(usuario).length === 0){
-		console.log("Dados incorretos!")
+	if(usuarioLogin == null || !await bcrypt.compare(usuarioLogin.senha, usuario.senha)){
+		return  null;
 	}
 	return usuarioLogin;
 };
 
 
-export const resetarSenha = async (resetSenha:ResetSenha): Promise<boolean | null> => {
+export const resetarSenha = async (resetSenha:ResetSenha): Promise<boolean | null | string> => {
 	try {
 		const result = await prisma.usuario.findFirst({
 			where: {
 				matricula: resetSenha.matricula,
-				senha: await bcrypt.hash(resetSenha.senha,10),
 			},
 		});
-		if (result == null) { return false}
+		if(result == null || await !bcrypt.compare(result.senha, resetSenha.senha)){
+			return  "Dados incorretos!";
+		}
 
 		await prisma.usuario.update({
 			where: {
 				matricula: resetSenha.matricula,
-				senha: await bcrypt.hash(resetSenha.senha,10),
 			},
 			data: {
 			  senha: await bcrypt.hash(resetSenha.novaSenha,10),

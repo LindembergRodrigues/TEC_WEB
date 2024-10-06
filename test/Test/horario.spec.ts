@@ -8,7 +8,7 @@ describe("testa horario", ()=>{
         });
         it("testa get não encontrado", async()=>{
             const response = await  request(app).get("/horario/capturarHorario/6");
-            expect(response.body).toBe("Aluno não cadastrado!")
+            expect(response.body).toBe("Horário não identificado!")
         })
 
         it("testa create", async()=>{
