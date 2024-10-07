@@ -30,14 +30,16 @@ export const deleteTurma = async (id: number): Promise<boolean> => {
 	}
 };
 
-export const getTurma = async (id: number): Promise<Turma | null> => {
+export const getTurma = async (id: number): Promise<Turma | null | string> => {
 	try {
 		const result = await prisma.turma.findFirst({
 			where: {
 				id: id,
 			},
 		});
-
+		if (result == null) {
+			return "Turma não Cadastrada!";
+		}
 		return result;
 	} catch (error) {
 		console.error('Error ', error);
@@ -45,15 +47,15 @@ export const getTurma = async (id: number): Promise<Turma | null> => {
 	}
 };
 
-export const updateTurma = async (turma: Turma, id: number): Promise<Turma | null> => {
+export const updateTurma = async (turma: Turma, id: number): Promise<Turma | string | null> => {
 	try {
 		const result = await prisma.turma.findFirst({
 			where: {
 				id: id,
 			},
 		});
-		if (result != null) {
-			return null;
+		if (result == null) {
+			return "Turma não encontrada!";
 		}
 
 		const update = await prisma.turma.update({
