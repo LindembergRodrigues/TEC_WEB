@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# Intellij IDEA specific files
+.idea/*
+
 # production
 /build
 

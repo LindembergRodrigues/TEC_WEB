@@ -15,7 +15,7 @@ export const loginUser = async (usuario: UsuarioDTO): Promise<Usuario | null > =
 		},
 	});
 	
-	if(usuarioLogin == null || !await bcrypt.compare(usuarioLogin.senha, usuario.senha)){
+	if(usuarioLogin == null ||  !await bcrypt.compare(usuario.senha, usuarioLogin.senha)){
 		return  null;
 	}
 	return usuarioLogin;
