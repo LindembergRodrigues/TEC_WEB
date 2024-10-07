@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 export const createUser = async (usuario: Usuario): Promise<Usuario> => {
-	if (Object.keys(usuario).length === 0) {
-		console.error("Vazio")
+	if (usuario == null) {
+		console.error("Dados invalido");
 	}
 	return prisma.usuario.create({
 		data: {
@@ -35,14 +35,16 @@ export const deleteUsers = async (matricula: string): Promise<boolean> => {
 	}
 };
 
-export const getUsers = async (matricula: string): Promise<Usuario | null> => {
+export const getUsers = async (matricula: string): Promise<Usuario | null | string> => {
 	try {
 		const result = await prisma.usuario.findFirst({
 			where: {
 				matricula: matricula,
 			},
 		});
-
+		if (result == null){
+		return "Usuário não encontrado!"
+		}
 		return result;
 	} catch (error) {
 		console.error('Error ', error);

@@ -18,38 +18,22 @@ describe("testa turma", ()=>{
             expect(response.body).toHaveProperty("descricao","500")
         })
         it("testa update", async()=>{
-            const response = await  request(app).put("/disciplina/atulizarDisciplina/124589").send({
-                codigo: "124589",
-                descricao: "Programação Web - Optativa",
-                creditos: 4,
-                periodo: 9,
-                createdAt: new Date(),
+            const response = await  request(app).put("/turma/atulizaTurma/77").send({
+                descricao: "LCC 3",
             })
-            expect(response.status).toBe(200);
-            expect(response.body).toBe("Atualizado!")
-        })
-
-        it("testa update", async()=>{
-            const response = await  request(app).put("/disciplina/atulizarDisciplina/124589").send({
-                codigo: "124589",
-                descricao: "Programação Web - Optativa",
-                creditos: 4,
-                periodo: 9,
-                createdAt: new Date(),
-            })
-            expect(response.status).toBe(200);
-            expect(response.body).toBe("Atualizado!")
+            expect(response.status).toBe(201);
+            expect(response.body).toHaveProperty("descricao","LCC 3")
         })
 
         it("testa get", async()=>{
-            const response = await  request(app).get("/disciplina/capturarDisciplina/124589");
+            const response = await  request(app).get("/turma/capturarTurma/77");
             expect(response.status).toBe(200);
-            expect(response.body).toHaveProperty("codigo","124589")
+            expect(response.body).toHaveProperty("descricao","LCC 3")
         })
 
         it("testa delete", async()=>{
-            const response = await  request(app).delete("/disciplina/deletarDisciplina/124589");
-            expect(response.status).toBe(200);
+            const response = await  request(app).delete("/turma/deletarTurma/79");
+            expect(response.status).toBe(201);
             expect(response.body).toBe("Removido!")
         })
 
