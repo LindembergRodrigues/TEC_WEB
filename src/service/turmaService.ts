@@ -32,6 +32,9 @@ export const deleteTurma = async (id: number): Promise<boolean> => {
 
 export const getTurma = async (id: number): Promise<Turma | null | string> => {
 	try {
+		if (id === -1){
+			return await prisma.turma.findFirst()
+		}
 		const result = await prisma.turma.findFirst({
 			where: {
 				id: id,

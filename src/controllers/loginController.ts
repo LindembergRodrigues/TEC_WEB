@@ -17,7 +17,8 @@ export const login = async (req: Request, res: Response) => {
     if (newUser != null) {
       const tokenData = {
         matricula: newUser.matricula,
-        email: newUser.email
+        email: newUser.email,
+        role: newUser.tipo,
       };
 
       const jwtToken = token.sign(tokenData, process.env.JWT_SECRET!, { expiresIn: '1h' });

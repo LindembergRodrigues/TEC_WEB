@@ -5,8 +5,8 @@ import * as disciplinaService from '../service/disciplinaService';
 export const createDisciplina = async (req: Request, res: Response) => {
   const disciplina = req.body as Disciplina;
   try {
-    await disciplinaService.createDisciplina(disciplina);
-    res.status(201).json(disciplina);
+    const disciplinaAux = await disciplinaService.createDisciplina(disciplina);
+    res.status(201).json(disciplinaAux);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create disciplina' });
   }

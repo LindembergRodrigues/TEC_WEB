@@ -37,6 +37,9 @@ export const deleteUsers = async (matricula: string): Promise<boolean> => {
 
 export const getUsers = async (matricula: string): Promise<Usuario | null | string> => {
 	try {
+		if (matricula === null){
+		return 	await prisma.usuario.findFirst()
+		}
 		const result = await prisma.usuario.findFirst({
 			where: {
 				matricula: matricula,
