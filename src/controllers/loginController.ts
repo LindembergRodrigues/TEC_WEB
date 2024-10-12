@@ -22,7 +22,11 @@ export const login = async (req: Request, res: Response) => {
       };
 
       const jwtToken = token.sign(tokenData, process.env.JWT_SECRET!, { expiresIn: '1h' });
-      res.status(200).json({ message: "Login efetuado com sucesso", token: jwtToken });
+      res.status(200).json({ message: "Login efetuado com sucesso", token: jwtToken ,user: {
+          matricula: newUser.matricula,
+          email: newUser.email,
+          role: newUser.tipo,
+        } });
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }

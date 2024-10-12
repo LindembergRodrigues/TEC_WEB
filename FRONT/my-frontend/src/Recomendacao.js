@@ -22,19 +22,20 @@ const Recomendacao = ({ matricula }) => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Previne o comportamento padrão do formulário
+        e.preventDefault();
 
-        // Validação para aceitar apenas 0 ou entre 16 e 24
-        if (creditos === '' || (creditos !== '0' && (creditos < 16 || creditos > 24))) {
+        // Validação para permitir apenas 0 ou valores entre 16 e 24
+        if (creditos !== 0 && (creditos < 16 || creditos > 24)) {
             setError('Por favor, insira 0 ou um valor entre 16 e 24.');
             return;
         }
-        setError(''); // Limpa o erro se a validação for bem-sucedida
-        fetchRecomendacoes(); // Chama a função para buscar recomendações
+
+        setError(''); // Limpa erros anteriores
+        fetchRecomendacoes(); // Busca as recomendações
     };
 
     const handleBack = () => {
-        navigate('/Menu'); // Navega de volta ao menu
+        navigate('/'); // Navega de volta ao menu
     };
 
     return (
@@ -47,7 +48,7 @@ const Recomendacao = ({ matricula }) => {
                     type="number"
                     label="Quantidade de Créditos"
                     value={creditos}
-                    onChange={(e) => setCreditos(e.target.value)}
+                    onChange={(e) => setCreditos(parseInt(e.target.value, 10))} // Converte o input para inteiro
                     inputProps={{ min: 0, max: 24 }} // Define o intervalo de créditos
                     required
                 />
@@ -71,7 +72,7 @@ const Recomendacao = ({ matricula }) => {
                 ))}
             </ul>
             <Button variant="contained" color="secondary" onClick={handleBack} style={{ marginTop: '20px' }}>
-                Voltar ao Menu
+                Sair
             </Button>
         </Container>
     );

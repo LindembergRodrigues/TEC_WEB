@@ -1,4 +1,3 @@
-// src/components/Disciplinas.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
@@ -37,6 +36,7 @@ const Disciplinas = () => {
             setDisciplinas(response.data);
         } catch (err) {
             console.error('Erro ao buscar disciplinas:', err);
+            setError('Erro ao buscar disciplinas.');
         }
     };
 
@@ -78,7 +78,7 @@ const Disciplinas = () => {
         try {
             if (isEditing) {
                 // Editar disciplina
-                await axios.put(`http://localhost:3000/disciplina/atulizarDisciplina/${editId}`, disciplinaData);
+                await axios.put(`http://localhost:3000/disciplina/atualizarDisciplina/${editId}`, disciplinaData);
             } else {
                 // Criar disciplina
                 await axios.post('http://localhost:3000/disciplina/criarDisciplina', disciplinaData);
@@ -103,7 +103,7 @@ const Disciplinas = () => {
             periodo: disciplina.periodo,
         });
         setIsEditing(true);
-        setEditId(disciplina.codigo);
+        setEditId(disciplina.codigo); // Certifique-se que o código seja único ou use um id
     };
 
     // Função para resetar o formulário

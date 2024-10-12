@@ -4,7 +4,7 @@ import { TextField, Button, Container, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLogin }) => { // Recebendo onLogin como prop
+const Login = ({ onLogin }) => {
     const [matricula, setMatricula] = useState('');
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
@@ -19,16 +19,26 @@ const Login = ({ onLogin }) => { // Recebendo onLogin como prop
                 senha,
             });
 
-            // Se o login for bem-sucedido, armazene o token (se necessário) e redirecione
-            const token = response.data.token; // armazene o token se precisar
-            localStorage.setItem('token', token); // ou qualquer outro método de armazenamento
+            // Captura o token e os dados do usuário
+            const token = response.data.token;
+            const userData = response.data.user; // Captura o objeto 'user'
 
-            // Chama onLogin passando os dados do usuário
-            const userData = { matricula, tipo: response.data.role }; // Ajuste conforme os dados retornados
-            onLogin(userData); // Atualiza o estado do usuário no App.js
+            // Armazena o token e os dados do usuário no localStorage
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(userData)); // Armazena os dados do usuário
 
-            // Redireciona para o menu após o login
-            navigate('/menu');
+            // Chama a função onLogin e passa os dados do usuário
+            onLogin(userData);
+
+            // Redireciona com base na role do usuário
+            if (userData.role === 'ALUNO') {
+                navigate('/recomendacao');
+            } else if (userData.role === 'PROFESSOR') {
+                navigate('/cadastrar-historico');
+            } else if (userData.role === 'COORDENADOR') {
+                navigate('/cadastrar-disciplina');
+            }
+
         } catch (err) {
             setError('Login falhou. Verifique suas credenciais.');
             console.error(err);

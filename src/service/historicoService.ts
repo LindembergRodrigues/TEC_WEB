@@ -132,7 +132,7 @@ export const sugerirMatricula = async (matriculaUsuario: string, qtdCredito: num
             }
         })
     }else{
-        const disciplinasCursadas = historico.map((item) => item.matriculaUsuario );
+        const disciplinasCursadas = historico.filter((item) => item.situacao === 'APR').map((item) => item.matriculaUsuario );
 
         let qtdCadeiras = 0
         if(qtdCredito === 0 ){
@@ -148,7 +148,11 @@ export const sugerirMatricula = async (matriculaUsuario: string, qtdCredito: num
                 codigo: {
                     notIn:disciplinasCursadas
                 }
-            },take:qtdCadeiras
+            },
+            orderBy: {
+                periodo: 'asc',
+            }
+            ,take:qtdCadeiras
         })
         return sugestao;
     }

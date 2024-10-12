@@ -34,8 +34,9 @@ export const deleteDisciplina = async (codigo: string): Promise<boolean> => {
 
 export const getDisciplina = async (codigo: string ): Promise<Disciplina | null | string | Disciplina[]> => {
 	try {
-		if (codigo === "all"){
-			return await prisma.disciplina.findMany()
+		if (codigo === "all") {
+			const disciplinas = await prisma.disciplina.findMany();
+			return disciplinas;
 		}
 		const result = await prisma.disciplina.findFirst({
 			where: {
@@ -51,9 +52,9 @@ export const getDisciplina = async (codigo: string ): Promise<Disciplina | null 
 		return null;
 	}
 };
-
 export const updateDisciplina = async (disciplina: Disciplina, codigo: string): Promise<Disciplina | null | string> => {
 	try {
+		// Verifica se a disciplina existe
 		const result = await prisma.disciplina.findFirst({
 			where: {
 				codigo: codigo,
@@ -63,21 +64,26 @@ export const updateDisciplina = async (disciplina: Disciplina, codigo: string): 
 			return "Disciplina não cadastrada!";
 		}
 
+		// Criação do objeto de atualização
+		const updateData: Partial<Disciplina> = { updatedAt: new Date() };
+
+		// Adiciona apenas os campos que não são undefined
+		if (disciplina.codigo !== undefined) updateData.codigo = disciplina.codigo;
+		if (disciplina.descricao !== undefined) updateData.descricao = disciplina.descricao;
+		if (disciplina.creditos !== undefined) updateData.creditos = disciplina.creditos;
+		if (disciplina.turmaId !== undefined) updateData.turmaId = disciplina.turmaId;
+		if (disciplina.horarioId !== undefined) updateData.horarioId = disciplina.horarioId;
+		if (disciplina.professor !== undefined) updateData.professor = disciplina.professor;
+		if (disciplina.periodo !== undefined) updateData.periodo = disciplina.periodo;
+
+		// Atualiza a disciplina no banco de dados
 		const update = await prisma.disciplina.update({
 			where: {
 				codigo: codigo,
 			},
-			data: {
-				codigo: disciplina.codigo,
-				descricao: disciplina.descricao,
-				creditos: disciplina.creditos,
-				turmaId: disciplina.turmaId,
-				horarioId: disciplina.horarioId,
-				professor: disciplina.professor,
-				periodo: disciplina.periodo,
-				updatedAt: new Date(),
-			},
-		})
+			data: updateData,
+		});
+
 		return update;
 
 	} catch (error) {
@@ -85,3 +91,4 @@ export const updateDisciplina = async (disciplina: Disciplina, codigo: string): 
 		return null;
 	}
 };
+
