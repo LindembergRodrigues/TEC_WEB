@@ -12,8 +12,8 @@ const router = Router();
 
 router.post('/criarHistorico', createHistorico);
 router.get('/capturarHistorico/:matriculaUsuario', getHistoricos);
-router.delete('/deletarHistorico/:matriculaUsuario', deleteHistoricos);
-router.put('/atulizaHistorico/:matriculaUsuario', updateHistoricos);
+router.delete('/deletarHistorico/:matriculaUsuario/:codigoDisciplina', deleteHistoricos);
+router.put('/atualizaHistorico/:matricula/:codigoDisciplina', updateHistoricos);
 router.get('/sugerirDisciplina/:matricula/:qtdCreditos', sugerirMatricula);
 
 export default router;
